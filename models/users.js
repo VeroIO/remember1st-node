@@ -20,12 +20,8 @@ var users = {
   deleteSV: function(id, callback) {
     return db.query("delete from sinhvien where Id=?", [id], callback);
   },
-  updateUserInfo: function(id, user, callback) {
-    return db.query(
-      "update users set fullName=?,fstLogin=? where userName=?",
-      [user.fullName,'1',userName],
-      callback
-    );
+  updateUserInfo: function(user, callback) {
+    return db.query("update users set fullName=?,fstLogin=?,secretKey=? where userName=?", [user.fullName, "1",user.secretKey, user.userName], callback);
   }
 };
 module.exports = users;

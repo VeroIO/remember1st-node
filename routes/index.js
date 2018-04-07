@@ -4,11 +4,12 @@ var Users = require("../routes/users");
 var Login = require("../routes/login");
 var Register = require("../routes/register");
 var cIndex = require("../controllers/index")
-
+var Api = require("./api");
 
 router.use("/users", Users);
 router.use("/login",Login);
 router.use("/signup",Register);
+router.use("/api",Api);
 
 router.get("/", isLoggedIn, function(req,res) {
   console.log(req.isAuthenticated());
@@ -31,6 +32,7 @@ router.get("/logout", function(req, res) {
 router.get("/login.html/", function(req, res) {
   res.redirect("/login");
 });
+
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()){
     return next()

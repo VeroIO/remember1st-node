@@ -32,13 +32,13 @@
                             <div class="form-group">
                                 <label class="col-lg-2 col-md-3 control-label" for="">Tên Người Dùng</label>
                                 <div class="col-lg-10 col-md-9">
-                                    <input type="text" class="form-control" name="fullname">
+                                    <input type="text" class="form-control" name="fullName">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-lg-2 col-md-3 control-label" for="">Secret Key</label>
                                 <div class="col-lg-10 col-md-9">
-                                    <input type="text" class="form-control" name="secrect_key">
+                                    <input type="text" class="form-control" name="secretKey">
                                 </div>
                             </div>
                             <br>
@@ -49,13 +49,13 @@
                                 <div class="form-group">
                                     <label class="col-lg-2 col-md-3 control-label" for="">Tài Khoản</label>
                                     <div class="col-lg-10 col-md-9">
-                                        <input type="text" class="form-control" name="username" value="<?php echo $user_info->username ?>" disabled>
+                                        <input type="text" class="form-control" name="username" value="<%=user.userName %>" disabled>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-lg-2 col-md-3 control-label" for="">Tên Người Dùng</label>
                                     <div class="col-lg-10 col-md-9">
-                                        <input type="text" class="form-control" name="fullname" value="<?php echo $user_info->fullname ?>" disabled>
+                                        <input type="text" class="form-control" name="fullname" value="<%=user.fullName %>" disabled>
                                     </div>
                                 </div>
                             </form>
