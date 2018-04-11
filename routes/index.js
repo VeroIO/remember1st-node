@@ -6,6 +6,7 @@ var Register = require("../routes/register");
 var cIndex = require("../controllers/index")
 var Api = require("./api");
 
+
 router.use("/users", Users);
 router.use("/login",Login);
 router.use("/signup",Register);
@@ -21,6 +22,9 @@ router.post("/", function(req,res) {
   cIndex.indexPOST(req,res);
 })
 
+router.get("/test", function(req, res) {
+
+});
 
 router.get("/logout", function(req, res) {
   console.log(req.logout());

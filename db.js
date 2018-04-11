@@ -1,8 +1,12 @@
-var mysql = require("mysql");
-var connection = mysql.createPool({
+const Sequelize = require("sequelize");
+var mysql = require("mysql2");
+var sequelize = new Sequelize("remember", "root", "long", {
   host: "localhost",
-  user: "root",
-  password: "long",
-  database: "remember"
+  dialect: "mysql",
+  pool: {
+    max: 5,
+    min: 0,
+    idle: 10000
+  }
 });
-module.exports = connection;
+module.exports = sequelize;

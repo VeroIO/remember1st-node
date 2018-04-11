@@ -3,16 +3,6 @@ var bcrypt = require("bcrypt");
 var mUsers = require("../models/users");
 
 module.exports = function(passport) {
-  passport.serializeUser(function(user, done) {
-    done(null, user.id);
-  });
-
-  passport.deserializeUser(function(id, done) {
-    mUsers.getUserInfoById(id, function(err, rows) {
-      done(err, rows[0]);
-    });
-  });
-
   passport.use(
     "local-signup",
     new LocalStrategy(
@@ -22,46 +12,28 @@ module.exports = function(passport) {
         passReqToCallback: true
       },
       function(req, username, password, done) {
-        mUsers.getUserInfoByUserName(username, function(err, rows) {
-          if (err) {
-            return done(
-              null,
-              false,
-              req.flash("message", "Có Lỗi Xảy Ra|Error Code:01")
-            );
-          }
-          if (rows.length) {
-            console.log("Tài Khoản Đã abc");
-            return done(
-              null,
-              false,
-              req.flash("message", "Tên Đăng Nhập Đã Được Sử  Dụng")
-            );
+        mUsers.findOne({ where: {userName: username} }).then(function(task) {
+          if (task != null) {
+            return done(null,false,req.flash("message", "Tên Đăng Nhập Đã Được Sử  Dụng"));
           } else {
             const saltRounds = 10;
             var salt = bcrypt.genSaltSync(saltRounds);
             var hash = bcrypt.hashSync(password, salt);
             var newUserMysql = {
-              username: username,
+              userName: username,
               password: hash
             };
-            mUsers.addUser(newUserMysql, function(err, rows) {
-              if (err) {
-                console.log(err);
-                return done(
-                  null,
-                  false,
-                  req.flash("message", "Có Lỗi Xảy Ra|Error Code:02")
-                );
-              } else {
-                newUserMysql.id = rows.insertId;
-                return done(
-                  null,
-                  newUserMysql,
-                  req.flash("message", "Đăng Kí Thành Công")
-                );
-              }
+            mUsers.create(newUserMysql).then(function(task) {
+              newUserMysql.id = task.id;
+              return done(null, newUserMysql, req.flash("message", "Đăng Kí Thành Công"));
+            }).catch(function (err) {
+              console.log(err);
+              return done(null, false, req.flash("message", "Có Lỗi Xảy Ra|Error Code:02"));
             });
+          }
+        }).catch(function (err) {
+          if (err) {
+            return done(null,false,req.flash("message", "Có Lỗi Xảy Ra|Error Code:01"));
           }
         });
       }

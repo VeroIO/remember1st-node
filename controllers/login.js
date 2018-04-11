@@ -8,8 +8,8 @@ module.exports = function(passport) {
   });
 
   passport.deserializeUser(function(id, done) {
-    mUsers.getUserInfoById(id, function(err, rows) {
-      done(err, rows[0]);
+    mUsers.findOne({ where: { id: id } }).then(function(task) {
+      done(null,task);
     });
   });
   
@@ -22,18 +22,16 @@ module.exports = function(passport) {
         passReqToCallback: true
       },
       function(req, username, password, done) {
-        mUsers.getUserInfoByUserName(username, function(err, rows) {
-          if (err){
-              return done(err);
-          }
-          if (!rows.length) {
+        mUsers.findOne({ where: {userName: username} }).then(function(task) {
+          if (task == null) {
             return done(null, false, req.flash("loginMessage", "Không Tìm Thấy Tài Khoản."));
-          }
-          if (!bcrypt.compareSync(password, rows[0].password)) {
+          }else if (!bcrypt.compareSync(password, task.password)) {
             return done(null, false, req.flash("loginMessage", "Sai Mật Khẩu."));
-          } else {
-            return done(null, rows[0]);
+          }else{
+            return done(null, task);
           }
+        }).catch(function (err) {
+          return done(err);
         });
       }
     )
