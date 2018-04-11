@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.4.1deb2ubuntu2
--- http://www.phpmyadmin.net
+-- version 4.4.15.8
+-- https://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Apr 07, 2018 at 11:29 AM
--- Server version: 10.0.34-MariaDB-0ubuntu0.16.04.1
--- PHP Version: 7.0.28-0ubuntu0.16.04.1
+-- Client :  localhost
+-- Généré le :  Mer 11 Avril 2018 à 15:37
+-- Version du serveur :  5.6.31
+-- Version de PHP :  5.6.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,16 +17,40 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `remember`
+-- Base de données :  `remember`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Structure de la table `categories`
 --
 
-CREATE TABLE `users` (
+CREATE TABLE IF NOT EXISTS `categories` (
+  `id` int(11) NOT NULL,
+  `type` varchar(225) NOT NULL,
+  `name` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `categories`
+--
+
+INSERT INTO `categories` (`id`, `type`, `name`) VALUES
+(1, 'notes', 'Generic'),
+(2, 'notes', 'Address'),
+(3, 'notes', 'Bank Account'),
+(4, 'notes', 'Credit Card'),
+(5, 'notes', 'Custom'),
+(6, 'notes', 'Database');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `users`
+--
+
+CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL,
   `userName` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -35,35 +59,46 @@ CREATE TABLE `users` (
   `active` int(11) NOT NULL,
   `role` varchar(255) NOT NULL,
   `secretKey` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `users`
+-- Contenu de la table `users`
 --
 
 INSERT INTO `users` (`id`, `userName`, `password`, `fullName`, `fstLogin`, `active`, `role`, `secretKey`) VALUES
-(8, 'hellcatvn', '$2a$10$ywIYg282glrOFgwJh/IHielunJYGaJY029I.FSS5kDs7r26fxdlti', 'Trần Quốc Long', '1', 1, 'user', '22011304'),
+(8, 'hellcatvn', '$2a$10$ywIYg282glrOFgwJh/IHielunJYGaJY029I.FSS5kDs7r26fxdlti', 'Trần Quốc Long', '1', 1, 'admin', '22011304'),
 (9, 'test01', '$2a$10$FHKDxFcf7lfog4mdiHfJGeZAKuoXs9kxNdjzk8lGXvCa44Zq4j6LS', '', '0', 1, 'user', '');
 
 --
--- Indexes for dumped tables
+-- Index pour les tables exportées
 --
 
 --
--- Indexes for table `users`
+-- Index pour la table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pour les tables exportées
 --
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT pour la table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

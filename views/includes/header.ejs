@@ -1,3 +1,4 @@
+<% role=user.role %>
 <!doctype html>
 <!--[if lt IE 8]><html class="no-js lt-ie8"> <![endif]-->
 <html class="no-js">
@@ -293,12 +294,30 @@
                                         <span class="txt">Dashboard</span>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="cm.html">
-                                        <i class="fa fa-list"></i>
-                                        <span class="txt">Categories</span>
-                                    </a>
-                                </li>
+                                <% if (role=='admin') { %>
+                                    <li class="hasSub">
+                                        <a href="#" class="notExpand">
+                                            <i class="icomoon-icon-arrow-down-2 s16 hasDrop"></i>
+                                            <i class="s16 icomoon-icon-list"></i>
+                                            <span class="txt">Categories</span>
+                                            <span class="notification red">2</span>
+                                        </a>
+                                        <ul class="sub">
+                                            <li>
+                                                <a href="/notesmanagement.html">
+                                                    <i class="s16 icomoon-icon-file"></i>
+                                                    <span class="txt">Notes</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/formsmanagement.html">
+                                                    <i class="s16 icomoon-icon-file"></i>
+                                                    <span class="txt">Forms</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                <% } %>
                                 <li>
                                     <a href="#">
                                         <i class="fa fa-users"></i>
