@@ -1,0 +1,240 @@
+<%- include('../includes/header.ejs') %>
+<div id="token" class="hidden"><%=token%></div>
+<div class="col-lg-9 col-lg-offset-1">
+    <div id="content">
+        <div id="contentwrapper">`
+                <div class="panel panel-default toggle panelClose panelRefresh panelMove" id="tokendiv" style="margin-top: 10px;">
+                    <!-- Start .panel -->
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Quản Lí Giao Dịch</h4>
+                        <div class="panel-controls panel-controls-right">
+                            <a href="#" class="panel-refresh">
+                                <i class="brocco-icon-refresh s12"></i>
+                            </a>
+                            <a href="#" class="toggle panel-minimize">
+                                <i class="icomoon-icon-plus"></i>
+                            </a>
+                            <a href="#" class="panel-close">
+                                <i class="icomoon-icon-close"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <button class="btn btn-success pull-right" style="margin-right: 5px;" data-toggle="modal" data-target="#addcate">
+                                <i class="fa fa-plus"></i>Thêm GD</button>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Phân Loại</th>
+                                        <th>Tên</th>
+                                        <th>Hành Động</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% categories.forEach(function(category){ %>
+                                    <tr>
+                                        <td class="id">
+                                        <%=category.id %>
+                                        </td>
+                                        <td>
+                                        <%=category.type %>
+                                        </td>
+                                        <td>
+                                        <%=category.name %>
+                                        </td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <a class="btn btn-warning edit_giaodich" disabled>Sửa</a>
+                                                <a class="btn btn-danger del_giaodich">Xóa</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <% }); %>
+                                </tbody>
+                            </table>
+                            <div class="text-center">
+                                <ul class="pagination mt0 mb0">
+                                    <% if(paginate.hasPreviousPages==false){}else{%><li><a href="<%=paginate.href(true)%>"><i class="fa fa-angle-left"></i></a>
+                                    </li>      
+                                    <%}%>
+                                    <% pages.forEach(function(page){ %>
+                                    <li <% if(paginate.page==page.number){ %> class="active" <% }%>><a href='<%=page.url%>'><%=page.number%></a>
+                                    </li>
+                                    <% }); %>
+                                    <% if(paginate.hasNextPages(pageCount)==false){}else{%><li><a href="<%=paginate.href()%>"><i class="fa fa-angle-right"></i></a>
+                                    </li>
+                                    <%}%>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">Code By
+                        <a href="https://www.facebook.com/hellcat.info">HellCatVN-VGM</a>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+</div>
+<div id="divLoading" style="display:none">
+</div>
+<input type="hidden" name="mm" value="<?php echo $_SESSION[" mm_info "] ?>">
+
+<!-- End All modal need-->
+<div id="addcate" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Thêm Giao Dịch</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal group-border stripped">
+                    <div class="form-group">
+                        <label class="col-lg-2 col-md-3 control-label" for="">Phân Loại</label>
+                        <div class="col-lg-10 col-md-9">
+                            <input type="text" class="form-control" name="a_phanloai">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 col-md-3 control-label" for="">Tên</label>
+                        <div class="col-lg-10 col-md-9">
+                            <input type="text" class="form-control" name="a_ten">
+                        </div>
+                    </div>
+                    <a id="a_cate" class="btn btn-success pull-right">Thêm</a>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="ketqua" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Thêm Giao Dịch</h4>
+            </div>
+            <div class="modal-body text-center" id="contentketqua">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="tracuu" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Kết Quả Tra Cứu</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal group-border stripped">
+                    <div class="form-group">
+                        <label class="col-lg-2 col-md-3 control-label" for="">Tên Người Thuê</label>
+                        <div class="col-lg-10 col-md-9">
+                            <input type="text" class="form-control" name="t_fullname" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 col-md-3 control-label" for="">Facebook Người Thuê</label>
+                        <div class="col-lg-10 col-md-9">
+                            <input type="text" class="form-control" name="t_fblink" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 col-md-3 control-label" for="">Facebook ID Người Thuê</label>
+                        <div class="col-lg-10 col-md-9">
+                            <input type="number" min="0" class="form-control" name="t_fbid" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 col-md-3 control-label" for="">SĐT Người Thuê</label>
+                        <div class="col-lg-10 col-md-9">
+                            <input type="number" min="0" class="form-control" name="t_hirerphone" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 col-md-3 control-label" for="">Dịch Vụ</label>
+                        <div class="col-lg-10 col-md-9">
+                            <input type="text" class="form-control" name="t_service" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 col-md-3 control-label" for="">Giá Trị GD</label>
+                        <div class="col-lg-10 col-md-9">
+                            <input type="text" class="form-control" name="t_price" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 col-md-3 control-label" for="">Ghi Chú</label>
+                        <div class="col-lg-10 col-md-9">
+                            <textarea name="t_note" class="form-control" disabled></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+    $(".check_giaodich").click(function () {
+        id = $(this).closest("tr").find(".id").text();
+        console.log(id);
+        $.post('controller/c_quanligiaodich.php', {
+            type: 'tracuu',
+            id: id,
+        }, function (data, status) {
+            data = JSON.parse(data);
+            $('input[name=t_fullname]').val(data.hirer_name);
+            $('input[name=t_fblink]').val(data.hirer_fb);
+            $('input[name=t_fbid]').val(data.hirer_fbid);
+            $('input[name=t_hirerphone]').val(data.hirer_phone);
+            $('input[name=t_service]').val(data.service);
+            $('input[name=t_price]').val(data.price);
+            $('textarea[name=t_note]').val(data.note);
+            $('#tracuu').modal('show');
+        });
+    });
+    $(".del_giaodich").click(function () {
+        id = $(this).closest("tr").find(".id").text();
+        var result = confirm("Want to delete?");
+        if (result == true) {
+            $.post('controller/c_quanligiaodich.php', {
+                type: 'xoagiaodich',
+                id: id,
+            }, function (data, status) {
+            });
+        }
+    });
+    $('#a_gd').click(function () {
+        $('#themgd').modal('hide');
+        cate_type = $('input[name=a_phanloai]').val();
+        cate_name = $('input[name=a_ten]').val();
+        $.post('controller/c_quanligiaodich.php', {
+            type: 'them',
+            cate_type: cate_type,
+            cate_name: cate_name,
+        }, function (data, status) {
+            console.log(data);
+            $('#ketqua').modal('show');
+            $('#contentketqua').html(data);
+        });
+    });
+</script>
+
+<%- include('../includes/footer.ejs') %>

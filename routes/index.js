@@ -5,18 +5,18 @@ var Login = require("../routes/login");
 var Register = require("../routes/register");
 var cIndex = require("../controllers/index")
 var Api = require("./api");
-
+var Notes = require("../controllers/admin/notesmanagement");
 
 router.use("/users", Users);
 router.use("/login",Login);
 router.use("/signup",Register);
 router.use("/api",Api);
+router.use("/notesmanagement.html",Notes);
 
 router.get("/", isLoggedIn, function(req,res) {
   console.log(req.isAuthenticated());
   var user=req.user;
   res.render("index",{user});
-  //res.render("test");
 });
 router.post("/", function(req,res) {
   cIndex.indexPOST(req,res);

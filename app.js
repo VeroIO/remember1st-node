@@ -8,6 +8,7 @@ var passport = require("passport");
 var morgan = require("morgan");
 var session = require("express-session");
 var cookieParser = require("cookie-parser");
+const paginate = require("express-paginate");
 
 var indexRouter = require('./routes/index');
 
@@ -27,7 +28,7 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 // required for passport
 app.use(session({
-    secret: 'kodizimcomisrunning',
+    secret: 'hellcatvn14056',
     resave: true,
     saveUninitialized: true
  } )); // session secret
