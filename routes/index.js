@@ -6,12 +6,18 @@ var Register = require("../routes/register");
 var cIndex = require("../controllers/index")
 var Api = require("./api");
 var Notes = require("../controllers/admin/notesmanagement");
+var Allthing = require("../controllers/secure/allthing");
+var Accounts = require("../controllers/secure/account");
+var AddOpt = require("../routes/addOption");
 
 router.use("/users", Users);
 router.use("/login",Login);
 router.use("/signup",Register);
 router.use("/api",Api);
 router.use("/notesmanagement.html",Notes);
+router.use("/allthing.html", Allthing);
+router.use("/accounts.html", Accounts);
+router.use("/addopt",AddOpt)
 
 router.get("/", isLoggedIn, function(req,res) {
   console.log(req.isAuthenticated());
