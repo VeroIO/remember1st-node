@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.4.15.8
--- https://www.phpmyadmin.net
+-- version 4.5.4.1deb2ubuntu2
+-- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 25, 2018 at 04:24 PM
--- Server version: 5.6.31
--- PHP Version: 5.6.25
+-- Generation Time: Apr 26, 2018 at 01:25 AM
+-- Server version: 10.0.34-MariaDB-0ubuntu0.16.04.1
+-- PHP Version: 7.0.28-0ubuntu0.16.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,11 +26,11 @@ SET time_zone = "+00:00";
 -- Table structure for table `categories`
 --
 
-CREATE TABLE IF NOT EXISTS `categories` (
+CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
   `type` varchar(225) NOT NULL,
   `name` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `categories`
@@ -42,9 +42,31 @@ INSERT INTO `categories` (`id`, `type`, `name`) VALUES
 (3, 'notes', 'Bank Account'),
 (4, 'notes', 'Credit Card'),
 (5, 'notes', 'Custom'),
-(6, 'notes', 'Database'),
-(7, 'notes', 'test'),
-(10, 'notes', 'Nát');
+(6, 'notes', 'Database');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `securePlaces`
+--
+
+CREATE TABLE `securePlaces` (
+  `id` int(11) NOT NULL,
+  `belongToUser` varchar(255) NOT NULL,
+  `mainType` varchar(255) NOT NULL,
+  `userName` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `website` varchar(255) NOT NULL,
+  `topSecret` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `securePlaces`
+--
+
+INSERT INTO `securePlaces` (`id`, `belongToUser`, `mainType`, `userName`, `password`, `title`, `website`, `topSecret`) VALUES
+(1, 'hellcatvn', '1', 'hellcatvn@gmail.com', 'long1304', 'FB:Trần Quốc Long Bị Khóa', 'https://www.facebook.com', 0);
 
 -- --------------------------------------------------------
 
@@ -52,7 +74,7 @@ INSERT INTO `categories` (`id`, `type`, `name`) VALUES
 -- Table structure for table `users`
 --
 
-CREATE TABLE IF NOT EXISTS `users` (
+CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `userName` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -61,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `active` int(11) NOT NULL,
   `role` varchar(255) NOT NULL,
   `secretKey` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
@@ -82,6 +104,12 @@ ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `securePlaces`
+--
+ALTER TABLE `securePlaces`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -95,12 +123,17 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `securePlaces`
+--
+ALTER TABLE `securePlaces`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
