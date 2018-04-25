@@ -44,7 +44,15 @@ router.route("").post(isLoggedIn,function(req, res) {
             res.send("Thao Tác Không Thành Công");
         })
     }else if(type=="editcate"){
-
+        var editCategory = {
+          type: req.body.cate_type,
+          name: req.body.cate_name            
+        }
+        mCategories.update(editCategory,{ where: { id: req.body.cate_id } }).then(function(task) {
+            res.send("Đã Sửa Thành Công");
+        }).catch(function (err) {
+            res.send("Thao Tác Không Thành Công");
+        })        
     }else{
         res.send("Error")
     }
