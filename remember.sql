@@ -2,10 +2,10 @@
 -- version 4.4.15.8
 -- https://www.phpmyadmin.net
 --
--- Client :  localhost
--- Généré le :  Mer 11 Avril 2018 à 15:37
--- Version du serveur :  5.6.31
--- Version de PHP :  5.6.25
+-- Host: localhost
+-- Generation Time: Apr 25, 2018 at 04:24 PM
+-- Server version: 5.6.31
+-- PHP Version: 5.6.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,23 +17,23 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `remember`
+-- Database: `remember`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `categories`
+-- Table structure for table `categories`
 --
 
 CREATE TABLE IF NOT EXISTS `categories` (
   `id` int(11) NOT NULL,
   `type` varchar(225) NOT NULL,
   `name` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
--- Contenu de la table `categories`
+-- Dumping data for table `categories`
 --
 
 INSERT INTO `categories` (`id`, `type`, `name`) VALUES
@@ -42,12 +42,14 @@ INSERT INTO `categories` (`id`, `type`, `name`) VALUES
 (3, 'notes', 'Bank Account'),
 (4, 'notes', 'Credit Card'),
 (5, 'notes', 'Custom'),
-(6, 'notes', 'Database');
+(6, 'notes', 'Database'),
+(7, 'notes', 'test'),
+(10, 'notes', 'Nát');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
@@ -62,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 --
--- Contenu de la table `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `userName`, `password`, `fullName`, `fstLogin`, `active`, `role`, `secretKey`) VALUES
@@ -70,32 +72,32 @@ INSERT INTO `users` (`id`, `userName`, `password`, `fullName`, `fstLogin`, `acti
 (9, 'test01', '$2a$10$FHKDxFcf7lfog4mdiHfJGeZAKuoXs9kxNdjzk8lGXvCa44Zq4j6LS', '', '0', 1, 'user', '');
 
 --
--- Index pour les tables exportées
+-- Indexes for dumped tables
 --
 
 --
--- Index pour la table `categories`
+-- Indexes for table `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT pour les tables exportées
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pour la table `categories`
+-- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
--- AUTO_INCREMENT pour la table `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
